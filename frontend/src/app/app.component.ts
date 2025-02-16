@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
 
@@ -11,18 +10,18 @@ import { FooterComponent } from "./components/footer/footer.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'frontend';
-  private httpClient = inject(HttpClient); 
-  private destroyRef = inject(DestroyRef); 
-  ngOnInit(): void {
-    const subscription = this.httpClient.get('https://randomuser.me/api?results=20').subscribe({
-      next: (result) => { 
-        console.log(result); 
+  showHeaderFooter: boolean = true; 
+  
+  constructor(private router: Router) { 
+    this.router.events.subscribe(() => { 
+      if (this.router.url === '/login' || this.router.url == '/register') { 
+        this.showHeaderFooter = false; 
       }
-    }); 
-    this.destroyRef.onDestroy(() => { 
-      subscription.unsubscribe(); 
+      else { 
+        this.showHeaderFooter = true; 
+      }
     })
   }
 }
