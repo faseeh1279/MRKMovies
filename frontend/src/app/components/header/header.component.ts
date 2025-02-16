@@ -1,6 +1,7 @@
 import { Component, computed, inject, OnInit, Signal } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { AuthService } from '../users/service/auth.service';
 
 
 @Component({
@@ -11,11 +12,17 @@ import { switchMap } from 'rxjs';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit {
-  private readonly route = inject(ActivatedRoute); 
+  private authService = inject(AuthService); 
   
   ngOnInit(): void {
-    console.log(window.location.pathname);
-    console.log(this.route.url); 
+    const subscription = this.authService.getCurrentUser().subscribe({
+      next: (result) => { 
+        console.log(result); 
+      }, 
+      error: (error) => { 
+        console.error(error); 
+      }
+    }); 
+    
   }
-
 }

@@ -38,7 +38,7 @@ def registration_view(request): # Createing the Token on time of registration.
 
 
 class GetUsersList(APIView): 
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     def get(self, request): 
         user = User.objects.all() 
         serializer = UserSerializer(user, many=True)

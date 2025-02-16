@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators } from "@angular/forms"; 
 import { AuthService } from '../service/auth.service';
-import { type loginData as loginDataInterface} from '../model/auth.model';
+import { Token, type loginData as loginDataInterface} from '../model/auth.model';
 import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -37,8 +37,8 @@ export class LoginComponent {
     
     const subscription = this.authService.loginData(loginData).subscribe({ 
       next: (result) => { 
+        this.loadingScreen = false;
         this.router.navigate(['/home']); 
-        this.loadingScreen = false; 
       }, 
       error: (error) => { 
         console.error(error); 
