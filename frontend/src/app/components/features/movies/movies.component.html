@@ -1,1 +1,10 @@
-<p>movies works!</p>
+<h1 class="text-3xl text-white font-bold m-5">Uploaded Movies</h1>
+<div class="flex justify-center p-4">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            @for (movieObj of moviesList; track $index) {
+            <app-card-edit [movieDetail]="movieObj" />
+            }
+        </div>
+    </div>
+</div>

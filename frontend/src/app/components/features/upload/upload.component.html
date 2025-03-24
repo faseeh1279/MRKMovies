@@ -1,0 +1,228 @@
+<div class="mt-5">
+  <h2 class="text-white text-center font-extrabold text-3xl">Upload Movie</h2>
+
+  <!-- Stepper -->
+  <div class="mx-100 mt-5">
+    <ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
+      <li
+        class="flex md:w-full items-center text-blue-600 dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+          @if(currentStep() > 1) {
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+          </svg>
+          }
+          @else {
+          <span class="me-2">1</span>
+          }
+          Movie<span class="hidden sm:inline-flex sm:ms-2">Details</span>
+        </span>
+      </li>
+      <li [class.text-blue-600]="currentStep() > 1" [class.dark:text-blue-500]="currentStep() > 2"
+        class="flex md:w-full items-center after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+          @if(currentStep() > 2) {
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+          </svg>
+          }@else {
+          <span class="me-2">2</span>
+          }
+          Actor<span class="hidden sm:inline-flex sm:ms-2">Details</span>
+        </span>
+      </li>
+      <li [class.text-blue-600]="currentStep() === 3" [class.dark:text-blue-500]="currentStep() === 3"
+        class="flex md:w-full items-center after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
+
+          @if(this.currentStep() > 3) {
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+          </svg>
+          }
+          @else {
+          <span class="me-2">3</span>
+          }
+          Confirmation
+        </span>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Upload Movie Form -->
+  <form class="max-w-lg mx-auto mt-5" [formGroup]="uploadMovieForm" (ngSubmit)="onSubmit($event)">
+    <!-- Movie Details First Step -->
+    @if(currentStep() === 1) {
+    <!-- Movie Title -->
+    <div class="mb-5">
+      <label for="movie_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Movie Title</label>
+      <input type="text" id="movie_title"
+        [class]="movieTitle ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500' : 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+        placeholder="Enter Movie Title..." formControlName="title" />
+      @if(movieTitle) {
+      <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Error</span> Missing or Invalid field.</p>
+      }
+    </div>
+
+    <!-- Movie Genre -->
+    <div class="mb-5">
+      <label for="genre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+        genre</label>
+      <select id="countries"
+        [class]="movieGenre ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500' : 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+        formControlName="genre">
+        <option selected value>Choose a genre</option>
+        @for (genre of movieGenres(); track $index) {
+        <option [value]="genre">{{ genre }}</option>
+        }
+
+      </select>
+      @if(movieGenre) {
+      <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Error</span> Missing or Invalid field.</p>
+      }
+    </div>
+
+    <!-- Movie Upload Poster -->
+    <div class="mb-5">
+      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="moive_poster">Upload file</label>
+      <input
+        [class]="moviePoster ? 'block w-full text-sm text-red-900 border border-red-300 rounded-lg cursor-pointer bg-gray-50 dark:text-red-400 focus:outline-none dark:bg-gray-700 dark:border-red-600 dark:placeholder-red-400': 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'"
+        aria-describedby="file_input_help" id="moive_poster" type="file" formControlName="movie_poster" (change)="onFileSelected($event)">
+      @if(moviePoster) {
+      <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Error</span> Missing or Invalid field.</p>
+      }
+      @else {
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
+        800x400px).</p>
+      }
+    </div>
+
+    <!-- Movie Description -->
+    <div class="mb-5">
+      <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Movie
+        Description</label>
+      <textarea id="message" rows="4"
+        [class]="movieDescription ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500': 'block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' "
+        placeholder="Movie Description" formControlName="description"></textarea>
+      @if(movieDescription) {
+      <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+        <span class="font-medium">Error</span> Missing or Invalid field.
+      </p>
+      }
+    </div>
+    }
+
+
+    <!-- Actor Details Second Step -->
+    @if(currentStep() === 2) {
+    <!-- Actors List -->
+    <div class="mb-5">
+      <label for="actors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Actor's List</label>
+      <div formArrayName="actors">
+
+        <div *ngFor="let actor of Actors.controls; let i = index" class="flex justify-center m-2">
+          <input type="text" [formControlName]="i"
+            [class]="movieActors ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+            placeholder="Enter Actor Name..." />
+          <button type="button" class="cursor-pointer bg-red-500 text-white px-3 py-1 rounded-lg ms-2"
+            (click)="removeActors(i)">❌</button>
+        </div>
+        <!-- Show error message if validation fails -->
+        <p *ngIf="movieActors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">Error</span> Missing or Invalid field.
+        </p>
+        <button type="button" class="cursor-pointer bg-blue-500 text-white px-4 py-2 mt-2 rounded-lg"
+          (click)="addActor()">Add Actor</button>
+      </div>
+    </div>
+
+    <!-- Directors List -->
+    <div class="mb-5">
+      <label for="directors" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Director's
+        List</label>
+      <div formArrayName="directors">
+
+        <div *ngFor="let actor of Directors.controls; let i = index" class="flex justify-center m-2">
+          <input type="text" [formControlName]="i"
+            [class]="movieDirectors ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+            placeholder="Enter Director Name..." />
+          <button type="button" class="cursor-pointer bg-red-500 text-white px-3 py-1 rounded-lg ms-2"
+            (click)="removeDirectors(i)">❌</button>
+        </div>
+        <!-- Show error message if validation fails -->
+        <p *ngIf="movieDirectors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">Error</span> Missing or Invalid field.
+        </p>
+        <button type="button" class="cursor-pointer bg-blue-500 text-white px-4 py-2 mt-2 rounded-lg"
+          (click)="addDirector()">Add Director</button>
+      </div>
+    </div>
+
+
+    <!-- Release Date -->
+    <div class="my-5">
+      <label for="release_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Release Date
+      </label>
+      <div class="relative max-w-sm">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+          </svg>
+        </div>
+        <input datepicker id="default-datepicker" type="date"
+          [class]="movieReleaseDate ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500' : 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'"
+          placeholder="Release Date" formControlName="releaseDate">
+      </div>
+    </div>
+
+
+    }
+
+    <!-- Confirmation Final Step -->
+    @if(currentStep() === 3) {
+    <div class="m-5 flex justify-center mt-10">
+      <button type="submit"
+        class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-5"
+        (click)="loadingScreen.set(true); formSuccess.set(true)">Confirm Submission</button>
+    </div>
+    @if(loadingScreen()) {
+    <app-loading-screen />
+    }
+    }
+
+
+    @if(currentStep() !== 3) { 
+      <!--Form Submission -->
+    <div class="display flex justify-center mb-5 mt-5">
+      <!-- Reset Button -->
+      <button [type]="currentStep() === 1 ? 'reset' : 'button'"
+        class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-5"
+        (click)="currentStep() === 1 ? '' : prevStep()">{{ currentStep() === 1 ? 'Reset' : 'Go Back' }}</button>
+      <!-- Submit Button -->
+      <button type="button"
+        class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-5"
+        (click)="nextStep()">Next</button>
+    </div>
+    }
+  </form>
+
+</div>
+@if(formError()){
+<app-modal [errorStateInput]="formError()" (errorStateOutput)="formError.set(false)" />
+}
+
+@if(formSuccess()) {
+<app-movie-uploaded [successStateInput]="formSuccess()" (successStateOutput)="formSuccess.set(false)" />
+}

@@ -1,0 +1,14 @@
+<div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true" (click)="changeModalState()"></div>
+    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+            (click)="changeModalState()">
+            <div class="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
+                style="background-color: #020F24;" (click)="$event.stopPropagation()">
+                <!--Prevents click not to be triggered from inside the modal-->
+                <!-- Modal Body Paste Image Code Here. -->
+                 <img [src]="moviePoster()" alt="" style="height:fit-content; width:fit-content">
+            </div>
+        </div>
+    </div>
+</div>

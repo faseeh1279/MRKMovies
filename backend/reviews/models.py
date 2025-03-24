@@ -16,7 +16,7 @@ class Review(models.Model):
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='ratings')
-    rating = models.PositiveSmallIntegerField(choices=[(i, str(i)) for i in range(1, 11)])
+    rating = models.PositiveSmallIntegerField(choices=[(i, str(i)) for i in range(1, 6)])  # Rating scale: 1 to 5
 
     class Meta:
         unique_together = ('user', 'movie')  # Prevents duplicate ratings from the same user

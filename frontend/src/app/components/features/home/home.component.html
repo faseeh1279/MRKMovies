@@ -1,1 +1,11 @@
-<p>home works!</p>
+<div class="flex justify-center p-4">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            @for (movie of moviesList; track $index) {
+            <div>
+                <app-card-details [movieList]="movie"/>
+            </div>
+            }
+        </div>
+    </div>
+</div>

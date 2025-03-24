@@ -1,5 +1,6 @@
 from rest_framework import serializers 
 from django.contrib.auth.models import User 
+from .models import (PostMessage)
 
 class UserSerializer(serializers.ModelSerializer): 
     class Meta: 
@@ -33,3 +34,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
             password=password
         )
         return account
+
+class PostMessageSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = PostMessage
+        fields = ['user', 'message', 'email']
+        

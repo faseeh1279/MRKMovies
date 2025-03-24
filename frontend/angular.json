@@ -5,7 +5,11 @@
   "projects": {
     "frontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -24,17 +28,17 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              }, 
+              { 
+                "glob": "**/*", 
+                "input":"src/assets", 
+                "output": "/assets/"
               }
             ],
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -46,8 +50,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"
@@ -99,6 +103,6 @@
     }
   },
   "cli": {
-    "analytics": "349bdb98-9288-4c91-bbb1-d4cca1824f6e"
+    "analytics": false
   }
 }
