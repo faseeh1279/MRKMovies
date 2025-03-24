@@ -9,7 +9,7 @@ python -m venv env
   ```
 
 ### 2. Activate the virtual environment
-  Type the following command:
+  Navigate to the "env" folder and Type the following command:
 
 ```bash
 env/Scripts/activate 
