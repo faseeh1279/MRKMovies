@@ -29,7 +29,7 @@ Make sure that you are in the `backend` folder and run the following command
 python manage.py runserver 1234
 ```
 
-### 5. Run Fronend 
+### 5. Run Frontend 
 Navigate to the `frontend` folder and type the following command after installing the node_modules. 
 
 ```bash
