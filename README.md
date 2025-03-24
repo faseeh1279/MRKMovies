@@ -30,7 +30,7 @@ python manage.py runserver 1234
 ```
 
 ### 5. Run Fronend 
-Navigate to the front-end folder and type the following command after install the node_modules. 
+Navigate to the `frontend` folder and type the following command after installing the node_modules. 
 
 ```bash
 ng s 
