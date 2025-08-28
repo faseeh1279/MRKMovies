@@ -9,7 +9,7 @@ from rest_framework import status
 
 
 class MovieDetailView(APIView): 
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request): 
         # Only fetch movies uploaded by the logged-in user
@@ -49,7 +49,7 @@ class MovieDetailView(APIView):
 
 
 class MovieListAV(APIView): 
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     
     def get(self, request): 
         movies = Movie.objects.all() 
